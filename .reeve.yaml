@@ -1,0 +1,29 @@
+---
+type: pipeline
+name: Build Reeve Setup "Git"
+
+when:
+  workerGroup:
+    include: [soldier]
+  trigger:
+    include: [commit]
+  file:
+    include:
+      - .env
+      - .reeve.yaml
+
+steps:
+  - name: Load env
+    task: "@reeve/load-env-file"
+    params:
+      LOAD_ALL: "true"
+
+  - name: Build image
+    task: "@docker/build"
+    params:
+      DOCKER_LOGIN_REGISTRY: docker.io
+      DOCKER_LOGIN_USER: { env: docker/github/user }
+      DOCKER_LOGIN_PASSWORD: { env: docker/github/password }
+      NAME: docker.io/reeveci/setup-git
+      TAG: { var: STEP_VERSION }
+      PLATFORM: amd64
