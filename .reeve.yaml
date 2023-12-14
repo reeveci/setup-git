@@ -6,11 +6,13 @@ when:
   workerGroup:
     include: [soldier]
   trigger:
-    include: [commit]
+    include: [commit, action]
   file:
     include:
       - .env
       - .reeve.yaml
+  action:
+    include: [reeveci:setup-git:build]
 
 steps:
   - name: Load env
