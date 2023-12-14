@@ -4,4 +4,4 @@ This is a [Reeve](https://github.com/reeveci/reeve) step for setting up Git base
 
 ## Configuration
 
-See the environment variables described in ./Dockerfile
+See the environment variables described in [Dockerfile](Dockerfile).
